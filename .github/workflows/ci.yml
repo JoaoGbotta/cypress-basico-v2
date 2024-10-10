@@ -1,35 +1,20 @@
-name: CI
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    services:
-      xvfb:
-        image: cypress/browsers:node16.14.0-chrome100-ff99
-        options: --health-cmd "exit 0" --health-interval 5s --health-timeout 2s --health-retries 3
-        ports:
-          - 3000
-
+##teste pipeline
+## End-to-End ( teste de ponta a ponta)
+name: End-to-end tests 🧪
+on: [push] ## pipeline sera disparado sempre que houver um git push pro repositorio no github. qual push de qualquer banch
+jobs: ## no pipeline tem jobs nesse caso, ele so tem 1 job 
+##esse é o job cypressrun
+  cypress-run: 
+    runs-on: ubuntu-20.04 ## vai rodar numa imagem linux 
+    ## ira rodar seguintes testes 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+        ## 1 passo Checkout, baixar no workspace no githubactions o codigo do projeto workspace
+      - name: Checkout
+        uses: actions/checkout@v3
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      ## 2 passo rodar o codigo 
+      - name: Cypress run
+        uses: cypress-io/github-action@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'  # Especifique a versão do Node.js que você está usando
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run Cypress tests
-        run: npm run cypress:run  # Certifique-se de ter esse script no seu package.json
+        
