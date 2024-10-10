@@ -10,11 +10,11 @@ jobs: ## no pipeline tem jobs nesse caso, ele so tem 1 job
     steps:
         ## 1 passo Checkout, baixar no workspace no githubactions o codigo do projeto workspace
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       ## 2 passo rodar o codigo 
       - name: Cypress run
-        uses: cypress-io/github-action@v3
+        uses: cypress-io/github-action@v2
 
         
