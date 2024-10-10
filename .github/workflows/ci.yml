@@ -1,0 +1,18 @@
+#teste pipeline
+## End-to-End ( teste de ponta a ponta)
+name: End-to-end tests 🧪
+on: [push] ## pipeline sera disparado sempre que houver um git push pro repositorio no github. qual push de qualquer banch
+jobs: ## no pipeline tem jobs nesse caso, ele so tem 1 job 
+##esse é o job cypressrun
+  cypress-run: 
+    runs-on: ubuntu-20.04 ## vai rodar numa imagem linux 
+    ## ira rodar seguintes testes 
+    steps:
+        ## 1 passo Checkout, baixar no workspace no githubactions o codigo do projeto workspace
+      - name: Checkout
+        uses: actions/checkout@v2
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      ## 2 passo rodar o codigo 
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
